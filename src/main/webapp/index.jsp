@@ -5,9 +5,9 @@
 		</head>
 		<body>
 			<form action="index" method="POST">
-				Choose xml file:
+				<h2>Choose xml file</h2>
 				<input type="file" name="file" />
-				<input type="submit" value="Submit" />
+				<br><br><input type="submit" value="Submit" />
 			</form>
 		</body>
 </html>
