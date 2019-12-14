@@ -1,10 +1,10 @@
 <%@ page import ="java.util.List"%>
 <%@ page import ="Beans.Book"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <body>
-<h2>DOM parser!</h2>
+<h2>Parse result</h2>
 <table>
 	    <tr>
 		    <td>ID</td>
@@ -27,7 +27,7 @@
                 }
             }
            else {
-                out.println("<p>There are books!</p>");
+                out.println("<p>There are no books in file</p>");
            }
     %>
     </table>

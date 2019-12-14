@@ -6,13 +6,13 @@
          version="4.0">
 
   <servlet>
-    <servlet-name>DemoServlet</servlet-name>
+    <servlet-name>StartPage</servlet-name>
     <servlet-class>com.servlet.StartPage</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>DemoServlet</servlet-name>
-    <url-pattern>/index</url-pattern>
+    <servlet-name>StartPage</servlet-name>
+    <url-pattern>/index2</url-pattern>
   </servlet-mapping>
 
 </web-app>

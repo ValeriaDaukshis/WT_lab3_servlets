@@ -15,10 +15,10 @@ import java.util.List;
 @WebServlet("/dom")
 public class DomParser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> list = new XmlDeserializer().readXmlFile("C:\\Users\\dauks\\source\\WT_lab3\\books.xml");
+        List<Book> list = new XmlDeserializer().DomParser("C:\\Users\\dauks\\source\\WT_lab3\\books.xml");
 
         request.setAttribute("list", list);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dom.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/parserResult.jsp");
         requestDispatcher.forward(request, response);
     }
 }

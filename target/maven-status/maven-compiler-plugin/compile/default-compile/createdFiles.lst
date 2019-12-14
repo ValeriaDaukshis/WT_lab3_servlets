@@ -1,4 +1,7 @@
 Beans\Book.class
+com\servlet\SaxParser.class
 com\servlet\StartPage.class
+Parsers\XmlDeserializer$1.class
 Parsers\XmlDeserializer.class
 com\servlet\DomParser.class
+Parsers\XmlDeserializer$AdvancedXMLHandler.class
