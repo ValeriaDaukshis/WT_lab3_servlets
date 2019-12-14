@@ -17,17 +17,10 @@ import java.util.List;
 @WebServlet("/sax")
 public class SaxParser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            List<Book> list = new XmlDeserializer().SaxParser("C:\\Users\\dauks\\source\\WT_lab3\\books.xml");
-            request.setAttribute("list", list);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/parserResult.jsp");
-            requestDispatcher.forward(request, response);
-        }catch (SAXException ex){
-
-        }
-        catch (ParserConfigurationException ex){
-
-        }
+        List<Book> list = new XmlDeserializer().SaxParser("C:\\Users\\dauks\\source\\WT_lab3\\books.xml");
+        request.setAttribute("list", list);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/parserResult.jsp");
+        requestDispatcher.forward(request, response);
     }
 }
 

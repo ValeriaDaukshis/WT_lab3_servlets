@@ -4,13 +4,9 @@ import Beans.Book;
 import java.io.File;
 import java.io.IOException;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,6 +20,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlDeserializer {
     private static ArrayList<Book> bookList;
+    private static final Logger log = Logger.getLogger(XmlDeserializer.class);
     public ArrayList<Book> DomParser(String path) {
         bookList = new ArrayList<Book>();
         try {
@@ -50,19 +47,30 @@ public class XmlDeserializer {
                     bookList.add(new Book(id, name, author, pages, price));
                 }
             }
-        } catch (Exception e) {
-            //log.error(e.getMessage());
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
         }
         return bookList;
     }
 
-    public ArrayList<Book> SaxParser(String path) throws ParserConfigurationException, SAXException, IOException {
+    public ArrayList<Book> SaxParser(String path) {
         bookList = new ArrayList<Book>();
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = factory.newSAXParser();
+        try{
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
 
-        AdvancedXMLHandler handler = new AdvancedXMLHandler();
-        parser.parse(new File(path), handler);
+            AdvancedXMLHandler handler = new AdvancedXMLHandler();
+            parser.parse(new File(path), handler);
+        } catch (SAXException ex){
+            log.error(ex.getMessage());
+        }
+        catch (ParserConfigurationException ex){
+            log.error(ex.getMessage());
+        }
+        catch (IOException ex){
+            log.error(ex.getMessage());
+        }
+
         return bookList;
     }
 
