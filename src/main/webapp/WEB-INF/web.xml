@@ -12,7 +12,7 @@
 
   <servlet-mapping>
     <servlet-name>StartPage</servlet-name>
-    <url-pattern>/index2</url-pattern>
+    <url-pattern>/index</url-pattern>
   </servlet-mapping>
 
 </web-app>

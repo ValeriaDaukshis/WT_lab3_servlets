@@ -1,8 +1,13 @@
+<!DOCTYPE html>
 <html>
-<body>
-<h2>Hello. Choose parser!</h2>
-<a href="/dom">DOM</a>
-<a href="/sax">SAX</a>
-<a href="/stax">StAX</a>
-</body>
+		<head>
+			<title>Form input</title>
+		</head>
+		<body>
+			<form action="index" method="POST">
+				Choose xml file:
+				<input type="file" name="file" />
+				<input type="submit" value="Submit" />
+			</form>
+		</body>
 </html>
