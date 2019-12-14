@@ -2,9 +2,16 @@ package Parsers;
 
 import Beans.Book;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.xml.parsers.*;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.*;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
@@ -13,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -71,6 +79,85 @@ public class XmlDeserializer {
             log.error(ex.getMessage());
         }
 
+        return bookList;
+    }
+
+    public ArrayList<Book> StaxParser(String path){
+        int id = 0;
+        String name = null;
+        String author = null;
+        int pages = 0;
+        double price = 0.0;
+
+        boolean bName = false;
+        boolean bAuthor = false;
+        boolean bPrice = false;
+        boolean bPages = false;
+
+        try {
+            bookList = new ArrayList<Book>();
+            XMLInputFactory factory = XMLInputFactory.newInstance();
+            XMLEventReader eventReader =
+                    factory.createXMLEventReader(new FileReader(path));
+
+            while(eventReader.hasNext()) {
+                XMLEvent event = eventReader.nextEvent();
+
+                switch(event.getEventType()) {
+
+                    case XMLStreamConstants.START_ELEMENT:
+                        StartElement startElement = event.asStartElement();
+                        String qName = startElement.getName().getLocalPart();
+
+                        if (qName.equalsIgnoreCase("book")) {
+                            Iterator<Attribute> attributes = startElement.getAttributes();
+                            id = Integer.parseInt(attributes.next().getValue());
+                        } else if (qName.equalsIgnoreCase("name")) {
+                            bName = true;
+                        } else if (qName.equalsIgnoreCase("author")) {
+                            bAuthor = true;
+                        } else if (qName.equalsIgnoreCase("pages")) {
+                            bPages = true;
+                        }
+                        else if (qName.equalsIgnoreCase("price")) {
+                            bPrice = true;
+                        }
+                        break;
+
+                    case XMLStreamConstants.CHARACTERS:
+                        Characters characters = event.asCharacters();
+                        if(bName) {
+                            name = characters.getData();
+                            bName = false;
+                        }
+                        if(bAuthor) {
+                            author = characters.getData();
+                            bAuthor = false;
+                        }
+                        if(bPages) {
+                            pages = Integer.parseInt(characters.getData());
+                            bPages = false;
+                        }
+                        if(bPrice) {
+                            price = Double.parseDouble(characters.getData());
+                            bPrice = false;
+                        }
+                        break;
+
+                    case XMLStreamConstants.END_ELEMENT:
+                        EndElement endElement = event.asEndElement();
+
+                        if(endElement.getName().getLocalPart().equalsIgnoreCase("book")) {
+                            bookList.add(new Book(id, name, author, pages, price));
+                        }
+                        break;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            log.error(ex.getMessage());
+        } catch (XMLStreamException ex) {
+            log.error(ex.getMessage());
+        }
         return bookList;
     }
 
