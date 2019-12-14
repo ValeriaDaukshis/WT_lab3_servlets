@@ -1,1 +1,4 @@
-com\servlet\DemoServlet.class
+Beans\Book.class
+com\servlet\StartPage.class
+Parsers\XmlDeserializer.class
+com\servlet\DomParser.class

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<library>
+    <book id="1">
+        <name>The Lord of the Rings</name>
+        <author>J.R.R. Tolkien</author>
+        <pages>836</pages>
+        <price>48</price>
+    </book>
+    <book id="2">
+        <name>The hunger games</name>
+        <author>S. Kollins</author>
+        <pages>416</pages>
+        <price>26</price>
+    </book>
+    <book id="3">
+        <name>Harry Potter</name>
+        <author>J. K. Rowling</author>
+        <pages>525</pages>
+        <price>20</price>
+    </book>
+</library>
